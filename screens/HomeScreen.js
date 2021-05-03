@@ -1,5 +1,8 @@
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+
+import HeaderButton from "../components/HeaderButton";
 
 const HomeScreen = (props) => {
   console.log(props);
@@ -34,10 +37,10 @@ const HomeScreen = (props) => {
   );
 };
 
-CategoriesScreen.navigationOptions = (navData) => {
+HomeScreen.navigationOptions = (navData) => {
   return {
     headerTitle: "Meal Categories",
-    headerLeft: (
+    headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Menu"
@@ -50,6 +53,23 @@ CategoriesScreen.navigationOptions = (navData) => {
     ),
   };
 };
+
+// HomeScreen.navigationOptions = (navData) => {
+//   return {
+//     headerTitle: "Meal Categories",
+//     headerLeft: (
+//       <HeaderButtons HeaderButtonComponent={HeaderButton}>
+//         <Item
+//           title="Menu"
+//           iconName="ios-menu"
+//           onPress={() => {
+//             navData.navigation.toggleDrawer();
+//           }}
+//         />
+//       </HeaderButtons>
+//     ),
+//   };
+// };
 
 const styles = StyleSheet.create({
   screen: {

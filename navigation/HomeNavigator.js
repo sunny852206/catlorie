@@ -15,9 +15,9 @@ import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import Colors from "../constants/Colors";
 
-import CategoriesScreen from "../screens/CategoriesScreen";
-import CategoryMealsScreen from "../screens/CategoryMealsScreen";
-import MealDetailScreen from "../screens/MealDetailScreen";
+// import CategoriesScreen from "../screens/CategoriesScreen";
+// import CategoryMealsScreen from "../screens/CategoryMealsScreen";
+// import MealDetailScreen from "../screens/MealDetailScreen";
 
 const defaultStackNavOptions = {
   headerStyle: {
