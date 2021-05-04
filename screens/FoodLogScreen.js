@@ -1,15 +1,57 @@
-import React from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import FoodLogItem from "../components/FoodLogItem";
+import FoodLogInput from "../components/FoodLogInput";
 import HeaderButton from "../components/HeaderButton";
+
 const FoodLogScreen = (props) => {
+  const [enteredFood, setEnteredFood] = useState("");
+  const [foodList, setFoodList] = useState([]);
+
+  const foodInputHandler = (enteredFood) => {
+    setEnteredFood(enteredFood);
+  };
+
+  const addFoodHandler = () => {
+    setFoodList((currentFood) => [
+      ...currentFood,
+      { id: Math.random().toString(), value: enteredFood },
+    ]);
+    // setFoodList([...foodlist, enteredFood]);
+    console.log(enteredFood);
+  };
+
   return (
     <View style={styles.screen}>
       <View style={styles.inputContainer}>
-        <TextInput placeholder="Food Log" style={styles.input} />
-        <Button title="ADD" />
+        <TextInput
+          placeholder="Food Log"
+          style={styles.input}
+          onChangeText={foodInputHandler}
+          value={enteredFood}
+        />
+        <Button title="ADD" onPress={addFoodHandler} />
       </View>
+      <FlatList
+        keyExtractor={(item, index) => item.id}
+        data={foodList}
+        renderItem={(itemData) => <FoodLogItem title={itemData.item.value} />}
+      />
+      {/* {foodList.map((food) => (
+          <View key={food} style={styles.listItem}>
+            <Text>{food}</Text>
+          </View>
+        ))} */}
     </View>
   );
 };
