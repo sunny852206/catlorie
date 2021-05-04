@@ -1,25 +1,22 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import HeaderButton from "../components/HeaderButton";
 const FoodLogScreen = (props) => {
   return (
     <View style={styles.screen}>
-      <Text>Food Log Screen!</Text>
-      <Button
-        title="LOG Button(WIP)!"
-        onPress={() => {
-          //props.navigation.navigate({ routeName: "MealDetail" });
-        }}
-      />
+      <View style={styles.inputContainer}>
+        <TextInput placeholder="Food Log" style={styles.input} />
+        <Button title="ADD" />
+      </View>
     </View>
   );
 };
 
 FoodLogScreen.navigationOptions = (navData) => {
   return {
-    headerTitle: "Food Log",
+    headerTitle: "Add Food",
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
@@ -36,9 +33,21 @@ FoodLogScreen.navigationOptions = (navData) => {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
-    justifyContent: "center",
+    padding: 50,
+    // flex: 1,
+    // justifyContent: "center",
+    // alignItems: "center",
+  },
+  inputContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
+  },
+  input: {
+    width: "80%",
+    borderColor: "black",
+    borderWidth: 1,
+    padding: 10,
   },
 });
 
