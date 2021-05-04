@@ -160,7 +160,7 @@ const MainNavigator = createDrawerNavigator(
     HomeLogProfile: {
       screen: HomeLogProfileTabNavigator,
       navigationOptions: {
-        drawerLabel: "Meals",
+        drawerLabel: "Home",
       },
     },
     Profile: ProfileNavigator,

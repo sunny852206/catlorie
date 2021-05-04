@@ -15,6 +15,23 @@ const SettingsScreen = (props) => {
   );
 };
 
+SettingsScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Home",
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Menu"
+          iconName="ios-menu"
+          onPress={() => {
+            navData.navigation.toggleDrawer();
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
+};
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,

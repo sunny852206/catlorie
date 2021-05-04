@@ -39,7 +39,7 @@ const HomeScreen = (props) => {
 
 HomeScreen.navigationOptions = (navData) => {
   return {
-    headerTitle: "Meal Categories",
+    headerTitle: "Home",
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
