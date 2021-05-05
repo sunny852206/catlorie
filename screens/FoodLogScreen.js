@@ -15,14 +15,9 @@ import FoodLogInput from "../components/FoodLogInput";
 import HeaderButton from "../components/HeaderButton";
 
 const FoodLogScreen = (props) => {
-  const [enteredFood, setEnteredFood] = useState("");
   const [foodList, setFoodList] = useState([]);
 
-  const foodInputHandler = (enteredFood) => {
-    setEnteredFood(enteredFood);
-  };
-
-  const addFoodHandler = () => {
+  const addFoodHandler = (enteredFood) => {
     setFoodList((currentFood) => [
       ...currentFood,
       { id: Math.random().toString(), value: enteredFood },
@@ -33,15 +28,7 @@ const FoodLogScreen = (props) => {
 
   return (
     <View style={styles.screen}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Food Log"
-          style={styles.input}
-          onChangeText={foodInputHandler}
-          value={enteredFood}
-        />
-        <Button title="ADD" onPress={addFoodHandler} />
-      </View>
+      <FoodLogInput onAddFood={addFoodHandler} />
       <FlatList
         keyExtractor={(item, index) => item.id}
         data={foodList}
@@ -79,17 +66,6 @@ const styles = StyleSheet.create({
     // flex: 1,
     // justifyContent: "center",
     // alignItems: "center",
-  },
-  inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  input: {
-    width: "80%",
-    borderColor: "black",
-    borderWidth: 1,
-    padding: 10,
   },
 });
 
