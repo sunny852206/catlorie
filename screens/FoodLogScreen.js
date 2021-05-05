@@ -26,13 +26,25 @@ const FoodLogScreen = (props) => {
     console.log(enteredFood);
   };
 
+  const removeFoodHandler = (foodId) => {
+    setFoodList((currentFood) => {
+      return currentFood.filter((food) => food.id !== foodId);
+    });
+  };
+
   return (
     <View style={styles.screen}>
       <FoodLogInput onAddFood={addFoodHandler} />
       <FlatList
         keyExtractor={(item, index) => item.id}
         data={foodList}
-        renderItem={(itemData) => <FoodLogItem title={itemData.item.value} />}
+        renderItem={(itemData) => (
+          <FoodLogItem
+            id={itemData.item.id}
+            onDelete={removeFoodHandler}
+            title={itemData.item.value}
+          />
+        )}
       />
       {/* {foodList.map((food) => (
           <View key={food} style={styles.listItem}>
