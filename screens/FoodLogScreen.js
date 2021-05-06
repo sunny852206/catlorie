@@ -25,7 +25,7 @@ const FoodLogScreen = (props) => {
     ]);
     setIsAddMode(false);
     // setFoodList([...foodlist, enteredFood]);
-    console.log(enteredFood);
+    console.log("Added food:", enteredFood);
   };
 
   const removeFoodHandler = (foodId) => {
