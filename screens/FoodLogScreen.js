@@ -16,12 +16,14 @@ import HeaderButton from "../components/HeaderButton";
 
 const FoodLogScreen = (props) => {
   const [foodList, setFoodList] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false);
 
   const addFoodHandler = (enteredFood) => {
     setFoodList((currentFood) => [
       ...currentFood,
       { id: Math.random().toString(), value: enteredFood },
     ]);
+    setIsAddMode(false);
     // setFoodList([...foodlist, enteredFood]);
     console.log(enteredFood);
   };
@@ -32,9 +34,18 @@ const FoodLogScreen = (props) => {
     });
   };
 
+  const cancelFoodHandler = () => {
+    setIsAddMode(false);
+  };
+
   return (
     <View style={styles.screen}>
-      <FoodLogInput onAddFood={addFoodHandler} />
+      <Button title="Add Food" onPress={() => setIsAddMode(true)} />
+      <FoodLogInput
+        visible={isAddMode}
+        onAddFood={addFoodHandler}
+        onCancel={cancelFoodHandler}
+      />
       <FlatList
         keyExtractor={(item, index) => item.id}
         data={foodList}
@@ -57,7 +68,7 @@ const FoodLogScreen = (props) => {
 
 FoodLogScreen.navigationOptions = (navData) => {
   return {
-    headerTitle: "Add Food",
+    headerTitle: "Food Log",
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
