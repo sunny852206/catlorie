@@ -11,6 +11,7 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import FoodQuickAdd from "../components/FoodQuickAdd";
 import { Ionicons } from "@expo/vector-icons";
+import CategoriesScreen from "../screens/CategoriesScreen";
 
 const FoodLogInput = (props) => {
   // const [enteredFood, setEnteredFood] = useState("");
@@ -44,20 +45,23 @@ const FoodLogInput = (props) => {
     setIsAddMode(false);
   };
 
-  // const data = [
-  //   {
-  //     value: "Banana",
-  //   },
-  //   {
-  //     value: "Mango",
-  //   },
-  //   {
-  //     value: "Pear",
-  //   },
-  // ];
+  //
+
+  const renderGridItem = (itemData) => {
+    return (
+      <View>
+        <Text>{itemData.item.title}</Text>
+      </View>
+    );
+  };
+
+  //
 
   return (
     <Modal visible={props.visible} animationType="slide">
+      {/* ///// */}
+      <CategoriesScreen onAddFoodTest={addQuickFoodHandler} />
+      {/* ///// */}
       <View style={styles.inputContainer}>
         {/* <Button title="Quick Add" onPress={() => setIsAddMode(true)} /> */}
         <TouchableHighlight
@@ -77,7 +81,7 @@ const FoodLogInput = (props) => {
           onAddQuickFood={addQuickFoodHandler}
           onCancel={cancelFoodHandler}
         />
-        <View style={styles.container}>
+        {/* <View style={styles.container}>
           <Picker
             selectedValue={selectedValue}
             style={{ height: 200, width: 350 }}
@@ -94,7 +98,7 @@ const FoodLogInput = (props) => {
             <Picker.Item label="Food7" value="food7" />
             <Picker.Item label="Food8" value="food8" />
           </Picker>
-        </View>
+        </View> */}
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
             <Button title="CANCEL" color="red" onPress={props.onCancel} />
