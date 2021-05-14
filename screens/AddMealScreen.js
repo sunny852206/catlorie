@@ -17,18 +17,28 @@ import { TREAT } from "../data/dummy-data";
 
 import StoredMeal from "../components/StoredMeal";
 import StoredTreat from "../components/StoredTreat";
+import FoodLogInput from "../components/FoodLogInput";
 
-const FoodLogInput = (props) => {
-  const [isAddMode, setIsAddMode] = useState(false);
+const AddMealScreen = (props) => {
   const [quickFoodList, setQuickFoodList] = useState([]);
-  const [selectedValue, setSelectedValue] = useState({
-    title: "dummy_food",
-    calorie: 10,
-  });
+  const [isAddMode, setIsAddMode] = useState(false);
 
-  const foodInputHandler = (enteredFood) => {
-    setEnteredFood(enteredFood);
-  };
+  const [foodList, setFoodList] = useState([]);
+
+  // const addFoodHandler = (enteredFood) => {
+  //   setFoodList((currentFood) => [
+  //     ...currentFood,
+  //     {
+  //       id: Math.random().toString(),
+  //       calorie: enteredFood.calorie,
+  //       title: enteredFood.title,
+  //       // test: enteredFood,
+  //     },
+  //   ]);
+  //   // setIsAddMode(false);
+  //   // setFoodList([...foodlist, enteredFood]);
+  //   console.log("Added food:", enteredFood);
+  // };
 
   const addQuickFoodHandler = (foodId) => {
     setQuickFoodList((currentQuickFood) => [
@@ -37,7 +47,7 @@ const FoodLogInput = (props) => {
     ]);
     setIsAddMode(false);
     props.onAddQuickFood(foodId);
-    console.log(foodId);
+    console.log("Added Quick food!:", foodId);
   };
 
   const addDropDownFoodHandler = () => {
@@ -45,12 +55,17 @@ const FoodLogInput = (props) => {
     console.log(selectedValue);
   };
 
+  const removeFoodHandler = (foodId) => {
+    setFoodList((currentFood) => {
+      return currentFood.filter((food) => food.id !== foodId);
+    });
+  };
+
   const cancelFoodHandler = () => {
     setIsAddMode(false);
   };
 
   return (
-    // <Modal visible={props.visible} animationType="slide">
     <View style={styles.screen}>
       {/* <Button title="Quick Add" onPress={() => setIsAddMode(true)} /> */}
       <View style={styles.quickAdd}>
@@ -118,8 +133,24 @@ const FoodLogInput = (props) => {
         </View>
       </View>
     </View>
-    // </Modal>
   );
+};
+
+AddMealScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Add Meal",
+    // headerLeft: () => (
+    //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
+    //     <Item
+    //       title="Menu"
+    //       iconName="ios-menu"
+    //       onPress={() => {
+    //         navData.navigation.toggleDrawer();
+    //       }}
+    //     />
+    //   </HeaderButtons>
+    // ),
+  };
 };
 
 const styles = StyleSheet.create({
@@ -161,4 +192,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FoodLogInput;
+export default AddMealScreen;

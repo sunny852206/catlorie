@@ -7,15 +7,14 @@ import {
   StyleSheet,
   ScrollView,
   FlatList,
+  Modal,
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-
 import FoodLogItem from "../components/FoodLogItem";
-import FoodLogList from "../components/FoodLogList";
+import FoodLogInput from "../components/FoodLogInput";
 import AddMealScreen from "../screens/AddMealScreen";
-import HeaderButton from "../components/HeaderButton";
 
-const FoodLogScreen = (props) => {
+const FoodLogList = (props) => {
   const [foodList, setFoodList] = useState([]);
   const [isAddMode, setIsAddMode] = useState(false);
 
@@ -29,7 +28,7 @@ const FoodLogScreen = (props) => {
         // test: enteredFood,
       },
     ]);
-    setIsAddMode(false);
+    // setIsAddMode(false);
     // setFoodList([...foodlist, enteredFood]);
     console.log("Added food:", enteredFood);
   };
@@ -45,8 +44,9 @@ const FoodLogScreen = (props) => {
       },
     ]);
     setIsAddMode(false);
+
     // setFoodList([...foodlist, enteredFood]);
-    console.log("Added Quick food:", enteredFood);
+    console.log("Added Quick food?:", enteredFood);
   };
 
   const removeFoodHandler = (foodId) => {
@@ -61,69 +61,52 @@ const FoodLogScreen = (props) => {
 
   return (
     <View style={styles.screen}>
-      <View>
-        <Button title="Add Food" onPress={() => setIsAddMode(true)} />
-
-        <Button
-          title="Food"
-          onPress={() => {
-            props.navigation.navigate({ routeName: "AddMeal" });
-          }}
+      {/* <Button title="Add Food" onPress={() => setIsAddMode(true)} />
+    
+          <Button
+            title="Food"
+            onPress={() => {
+              props.navigation.navigate({ routeName: "AddMeal" });
+            }}
+          /> */}
+      {/* <AddFoodScreen
+            visible={isAddMode}
+            onAddFood={addFoodHandler}
+            onAddQuickFood={addQuickFoodHandler}
+            onCancel={cancelFoodHandler}
+          /> */}
+      <Modal visible={false}>
+        <AddMealScreen
+          onAddFood={addFoodHandler}
+          onAddQuickFood={addQuickFoodHandler}
+          onCancel={cancelFoodHandler}
         />
-      </View>
+      </Modal>
       {/* <AddMealScreen
-        // visible={isAddMode}
         onAddFood={addFoodHandler}
         onAddQuickFood={addQuickFoodHandler}
         onCancel={cancelFoodHandler}
       /> */}
-
-      {/* <FoodLogInput
-        visible={isAddMode}
-        onAddFood={addFoodHandler}
-        onAddQuickFood={addQuickFoodHandler}
-        onCancel={cancelFoodHandler}
-      /> */}
-      <View>
-        <FoodLogList />
-        <FlatList
-          keyExtractor={(item, index) => item.id}
-          data={foodList}
-          renderItem={(itemData) => (
-            <FoodLogItem
-              id={itemData.item.id}
-              onDelete={removeFoodHandler}
-              calorie={itemData.item.calorie}
-              name={itemData.item.title}
-              // test={itemData.item.test}
-            />
-          )}
-        />
-      </View>
+      <FlatList
+        keyExtractor={(item, index) => item.id}
+        data={foodList}
+        renderItem={(itemData) => (
+          <FoodLogItem
+            id={itemData.item.id}
+            onDelete={removeFoodHandler}
+            calorie={itemData.item.calorie}
+            name={itemData.item.title}
+            // test={itemData.item.test}
+          />
+        )}
+      />
       {/* {foodList.map((food) => (
-          <View key={food} style={styles.listItem}>
-            <Text>{food}</Text>
-          </View>
-        ))} */}
+              <View key={food} style={styles.listItem}>
+                <Text>{food}</Text>
+              </View>
+            ))} */}
     </View>
   );
-};
-
-FoodLogScreen.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Food Log",
-    headerLeft: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="Menu"
-          iconName="ios-menu"
-          onPress={() => {
-            navData.navigation.toggleDrawer();
-          }}
-        />
-      </HeaderButtons>
-    ),
-  };
 };
 
 const styles = StyleSheet.create({
@@ -135,4 +118,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FoodLogScreen;
+export default FoodLogList;

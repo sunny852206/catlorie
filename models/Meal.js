@@ -1,4 +1,4 @@
-class Category {
+class Meal {
   constructor(id, title, calorie, color) {
     this.id = id;
     this.title = title;
@@ -7,4 +7,4 @@ class Category {
   }
 }
 
-export default Category;
+export default Meal;

@@ -1,9 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
-const FoodLogItem = (props) => {
+const StoredTreat = (props) => {
   return (
-    <TouchableOpacity onPress={props.onDelete.bind(this, props.id)}>
+    // <TouchableOpacity onPress={props.onDelete.bind(this, props.id)}>
+    <TouchableOpacity>
       <View style={styles.listItem}>
         <Text>
           {props.name} {props.calorie}
@@ -17,14 +18,11 @@ const FoodLogItem = (props) => {
 
 const styles = StyleSheet.create({
   listItem: {
-    padding: 10,
-    marginTop: 10,
-    marginBottom: 10,
-    backgroundColor: "#ddd",
-    borderColor: "#000",
-    borderWidth: 1,
-    borderRadius: 20,
+    padding: 8,
+    marginVertical: 8,
+    backgroundColor: "#EEE",
+    borderRadius: 5,
   },
 });
 
-export default FoodLogItem;
+export default StoredTreat;
