@@ -1,9 +1,11 @@
 class Meal {
-  constructor(id, title, calorie, color) {
+  constructor(id, ownerId, brand, imageUrl, flavor, calorie) {
     this.id = id;
-    this.title = title;
+    this.ownerId = ownerId;
+    this.brand = brand;
+    this.imageUrl = imageUrl;
+    this.flavor = flavor;
     this.calorie = calorie;
-    this.color = color;
   }
 }
 

@@ -95,6 +95,7 @@ const FoodLogScreen = (props) => {
               onDelete={removeFoodHandler}
               calorie={itemData.item.calorie}
               name={itemData.item.title}
+
               // test={itemData.item.test}
             />
           )}

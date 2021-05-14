@@ -9,6 +9,10 @@ import {
   TouchableHighlight,
   FlatList,
 } from "react-native";
+import { useSelector } from "react-redux";
+
+import MealItem from "../components/log/MealItem";
+
 import { Picker } from "@react-native-picker/picker";
 import FoodQuickAdd from "../components/FoodQuickAdd";
 import { Ionicons } from "@expo/vector-icons";
@@ -20,9 +24,10 @@ import StoredTreat from "../components/StoredTreat";
 import FoodLogInput from "../components/FoodLogInput";
 
 const AddMealScreen = (props) => {
+  const meals = useSelector((state) => state.meals.availableMeals);
+
   const [quickFoodList, setQuickFoodList] = useState([]);
   const [isAddMode, setIsAddMode] = useState(false);
-
   const [foodList, setFoodList] = useState([]);
 
   // const addFoodHandler = (enteredFood) => {
@@ -77,7 +82,7 @@ const AddMealScreen = (props) => {
           }}
         >
           <Ionicons name="add-circle-outline" size={20} style={styles.icon}>
-            <Text>Quick Add</Text>
+            <Text>Quick Add!</Text>
           </Ionicons>
         </TouchableHighlight>
 
@@ -89,7 +94,7 @@ const AddMealScreen = (props) => {
       </View>
       {/* flatlist */}
       <View>
-        <View style={styles.mealList}>
+        {/* <View style={styles.mealList}>
           <Text style={styles.listTitle}>Meal</Text>
           <FlatList
             keyExtractor={(item, index) => item.id}
@@ -120,7 +125,26 @@ const AddMealScreen = (props) => {
               />
             )}
           />
-        </View>
+        </View> */}
+        <FlatList
+          data={meals}
+          keyExtractor={(item) => item.id}
+          renderItem={(itemData) => (
+            <MealItem
+              image={itemData.item.imageUrl}
+              brand={itemData.item.brand}
+              calorie={itemData.item.calorie}
+              flavor={itemData.item.flavor}
+              onViewDetail={() => {
+                props.navigation.navigate("MealDetail", {
+                  mealId: itemData.item.id,
+                  mealBrand: itemData.item.brand,
+                });
+              }}
+              onAddToCart={() => {}}
+            />
+          )}
+        />
       </View>
 
       {/* /// */}
@@ -155,7 +179,7 @@ AddMealScreen.navigationOptions = (navData) => {
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 50,
+    padding: 40,
     // flex: 1,
     // justifyContent: "center",
     // alignItems: "center",

@@ -10,10 +10,13 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 
 import HomeScreen from "../screens/HomeScreen";
 import FoodLogScreen from "../screens/FoodLogScreen";
-import AddMealScreen from "../screens/AddMealScreen";
 import PetProfileScreen from "../screens/PetProfileScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+
+import AddMealScreen from "../screens/AddMealScreen";
+import MealDetailScreen from "../screens/MealDetailScreen";
+
 import Colors from "../constants/Colors";
 
 // import CategoriesScreen from "../screens/CategoriesScreen";
@@ -51,6 +54,9 @@ const LogNavigator = createStackNavigator(
     },
     AddMeal: {
       screen: AddMealScreen,
+    },
+    MealDetail: {
+      screen: MealDetailScreen,
     },
   },
   {
