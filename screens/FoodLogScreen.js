@@ -40,7 +40,7 @@ const FoodLogScreen = (props) => {
       <View style={styles.summary}>
         <Text style={styles.summaryText}>
           Calories:
-          <Text style={styles.totalCalorie}> {logTotalCalorie} kcal</Text>
+          <Text style={styles.totalCalorie}> {logTotalCalorie}kcal</Text>
         </Text>
         <Button
           title="Add Meal"
