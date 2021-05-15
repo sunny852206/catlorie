@@ -20,10 +20,6 @@ import MealDetailScreen from "../screens/MealDetailScreen";
 
 import Colors from "../constants/Colors";
 
-// import CategoriesScreen from "../screens/CategoriesScreen";
-// import CategoryMealsScreen from "../screens/CategoryMealsScreen";
-// import MealDetailScreen from "../screens/MealDetailScreen";
-
 const defaultStackNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
@@ -43,7 +39,6 @@ const HomeNavigator = createStackNavigator(
     Home: HomeScreen,
   },
   {
-    // initialRouteName: 'Categories',
     defaultNavigationOptions: defaultStackNavOptions,
   }
 );
@@ -73,7 +68,6 @@ const PetNavigator = createStackNavigator(
     PetProfile: PetProfileScreen,
   },
   {
-    // initialRouteName: 'Categories',
     defaultNavigationOptions: defaultStackNavOptions,
   }
 );
@@ -116,6 +110,10 @@ const tabScreenConfig = {
         ) : (
           "Home"
         ),
+      tabBarOptions: {
+        activeTintColor: Colors.primaryColor,
+        style: { height: 55 },
+      },
     },
   },
   FoodLog: {
@@ -126,13 +124,17 @@ const tabScreenConfig = {
           <Ionicons name="ios-restaurant" size={25} color={tabInfo.tintColor} />
         );
       },
-      tabBarColor: Colors.accentColor,
       tabBarLabel:
         Platform.OS === "android" ? (
           <Text style={{ fontFamily: "open-sans-bold" }}>Favorites</Text>
         ) : (
           "Log"
         ),
+      tabBarOptions: {
+        activeTintColor: Colors.primaryColor,
+
+        style: { height: 55 },
+      },
     },
   },
   PetProfile: {
@@ -148,6 +150,10 @@ const tabScreenConfig = {
         ) : (
           "Profile"
         ),
+      tabBarOptions: {
+        style: { height: 55 },
+        activeTintColor: Colors.accprimaryColorentColor,
+      },
     },
   },
 };
@@ -166,7 +172,7 @@ const HomeLogProfileTabNavigator =
           labelStyle: {
             fontFamily: "open-sans",
           },
-          activeTintColor: Colors.accentColor,
+          activeTintColor: "Colors.accentColor",
         },
       });
 
@@ -183,6 +189,9 @@ const MainNavigator = createDrawerNavigator(
   },
   {
     contentOptions: {
+      itemsContainerStyle: {
+        marginTop: 18,
+      },
       activeTintColor: Colors.accentColor,
       labelStyle: {
         fontFamily: "open-sans-bold",
@@ -190,14 +199,5 @@ const MainNavigator = createDrawerNavigator(
     },
   }
 );
-
-// const Navigator = createStackNavigator({
-//   Home: HomeScreen,
-//   Categories: CategoriesScreen,
-//   CategoryMeals: {
-//     screen: CategoryMealsScreen,
-//   },
-//   MealDetail: MealDetailScreen,
-// });
 
 export default createAppContainer(MainNavigator);

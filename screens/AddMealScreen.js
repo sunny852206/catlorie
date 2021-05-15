@@ -24,64 +24,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { MEAL } from "../data/dummy-data";
 import { TREAT } from "../data/dummy-data";
 
-import StoredMeal from "../components/StoredMeal";
-import StoredTreat from "../components/StoredTreat";
-import FoodLogInput from "../components/FoodLogInput";
-
 const AddMealScreen = (props) => {
   const meals = useSelector((state) => state.meals.availableMeals);
   const dispatch = useDispatch();
 
-  const [quickFoodList, setQuickFoodList] = useState([]);
-  const [isAddMode, setIsAddMode] = useState(false);
-  const [foodList, setFoodList] = useState([]);
-
-  const addQuickFoodHandler = (foodId) => {
-    setQuickFoodList((currentQuickFood) => [
-      ...currentQuickFood,
-      { id: Math.random().toString(), value: foodId },
-    ]);
-    setIsAddMode(false);
-    props.onAddQuickFood(foodId);
-    console.log("Added Quick food!:", foodId);
-  };
-
-  const addDropDownFoodHandler = () => {
-    props.onAddFood(selectedValue);
-    console.log(selectedValue);
-  };
-
-  const removeFoodHandler = (foodId) => {
-    setFoodList((currentFood) => {
-      return currentFood.filter((food) => food.id !== foodId);
-    });
-  };
-
-  const cancelFoodHandler = () => {
-    setIsAddMode(false);
-  };
-
   return (
     <View style={styles.screen}>
-      {/* <View style={styles.quickAdd}>
-        <TouchableHighlight
-          activeOpacity={0.6}
-          underlayColor="#DDDDDD"
-          onPress={() => {
-            setIsAddMode(true);
-          }}
-        >
-          <Ionicons name="add-circle-outline" size={20} style={styles.icon}>
-            <Text>Quick Add!</Text>
-          </Ionicons>
-        </TouchableHighlight>
-
-        <FoodQuickAdd
-          visible={isAddMode}
-          onAddQuickFood={addQuickFoodHandler}
-          onCancel={cancelFoodHandler}
-        />
-      </View> */}
       <View>
         <FlatList
           data={meals}

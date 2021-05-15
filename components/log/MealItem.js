@@ -26,16 +26,6 @@ const MealItem = (props) => {
           <Text style={styles.calorie}>{props.calorie} kcal</Text>
         </View>
         <View style={styles.actions}>
-          {/* <Button
-            color={Colors.primary}
-            title="View Details"
-            onPress={props.onViewDetail}
-          />
-          <Button
-            color={Colors.primary}
-            title="To Cart"
-            onPress={props.onAddToCart}
-          /> */}
           <TouchableOpacity
             color={Colors.primary}
             // title="View Details"

@@ -14,9 +14,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Colors from "../constants/Colors";
 import LogItem from "../components/log/LogItem";
 
-import FoodLogItem from "../components/FoodLogItem";
-import FoodLogList from "../components/FoodLogList";
-import AddMealScreen from "../screens/AddMealScreen";
 import HeaderButton from "../components/HeaderButton";
 
 const FoodLogScreen = (props) => {
@@ -94,7 +91,6 @@ FoodLogScreen.navigationOptions = (navData) => {
 const styles = StyleSheet.create({
   screen: {
     margin: 20,
-
     // padding: 50,
     // // flex: 1,
     // // justifyContent: "center",
