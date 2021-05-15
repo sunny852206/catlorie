@@ -8,19 +8,28 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import Colors from "../constants/Colors";
+import * as logActions from "../store/actions/log";
 
 const MealDetailScreen = (props) => {
   const mealId = props.navigation.getParam("mealId");
   const selectedMeal = useSelector((state) =>
     state.meals.availableMeals.find((m) => m.id === mealId)
   );
+  const dispatch = useDispatch();
 
   return (
     <ScrollView>
       <Image style={styles.image} source={{ uri: selectedMeal.imageUrl }} />
-      <Button color={Colors.buttonColor} title="Add Food" onPress={() => {}} />
+      <Button
+        color={Colors.buttonColor}
+        title="Add Food"
+        onPress={() => {
+          dispatch(logActions.addToLog(selectedMeal));
+        }}
+      />
       <Text style={styles.calorie}>{selectedMeal.calorie}kcal</Text>
       <Text style={styles.flavor}>{selectedMeal.flavor}</Text>
     </ScrollView>

@@ -1,5 +1,4 @@
-import { ActionSheetIOS } from "react-native";
-import MEALS from "../../data/dummy-data";
+import LogItem from "../../models/log-item";
 import { ADD_TO_LOG } from "../actions/log";
 
 const initialState = {
@@ -13,6 +12,25 @@ export default (state = initialState, action) => {
       const addedMeal = action.meal;
       const mCalrie = addedMeal.calorie;
       const mBrand = addedMeal.brand;
+
+      let updateOrNewLogItem;
+
+      if (state.items[addedMeal.id]) {
+        // meal already added in the log
+        updateOrNewLogItem = new LogItem(
+          state.items[addedMeal.id].quantity + 1,
+          mCalrie,
+          mBrand,
+          state.items[addedMeal.id].sum + mCalrie
+        );
+      } else {
+        updateOrNewLogItem = new LogItem(1, mCalrie, mBrand, mCalrie);
+      }
+      return {
+        ...state,
+        items: { ...state.items, [addedMeal.id]: updateOrNewLogItem },
+        totalCalorie: state.totalCalorie + mCalrie,
+      };
   }
   return state;
 };

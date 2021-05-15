@@ -12,27 +12,6 @@ import Colors from "../../constants/Colors";
 
 const MealItem = (props) => {
   return (
-    // <View style={styles.meal}>
-    //   <View style={styles.imageContainer}>
-    //     <Image style={styles.image} source={{ uri: props.image }} />
-    //   </View>
-    //   <View style={styles.details}>
-    //     <Text style={styles.brand}>{props.brand}</Text>
-    //     <Text style={styles.calorie}>{props.calorie}kcal</Text>
-    //   </View>
-    //   <View style={styles.actions}>
-    //     <Button
-    //       color={Colors.primary}
-    //       title="View Details"
-    //       onPress={props.onViewDetail}
-    //     />
-    //     <Button
-    //       color={Colors.primary}
-    //       title="To Cart"
-    //       onPress={props.onAddToCart}
-    //     />
-    //   </View>
-    // </View>
     <View style={styles.meal}>
       <TouchableOpacity onPress={props.onViewDetail}>
         <View style={styles.imageContainer}>
@@ -43,8 +22,8 @@ const MealItem = (props) => {
       <View style={{ flex: 1, justifyContent: "center" }}>
         <View style={styles.details}>
           <Text style={styles.brand}>{props.brand}</Text>
-          <Text style={styles.flavor}>{props.flavor}</Text>
-          <Text style={styles.calorie}>{props.calorie}kcal</Text>
+          <Text style={styles.flavor}>{props.flavor} </Text>
+          <Text style={styles.calorie}>{props.calorie} kcal</Text>
         </View>
         <View style={styles.actions}>
           {/* <Button
@@ -68,7 +47,7 @@ const MealItem = (props) => {
           <TouchableOpacity
             color={Colors.primary}
             // title="To Cart"
-            onPress={props.onAddToCart}
+            onPress={props.onAddToLog}
           >
             <Text style={styles.button}>Add Food</Text>
           </TouchableOpacity>

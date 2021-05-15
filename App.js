@@ -6,10 +6,12 @@ import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 
 import mealsReducer from "./store/reducers/meals";
+import logReducer from "./store/reducers/log";
 import HomeNavigator from "./navigation/HomeNavigator";
 
 const rootReducer = combineReducers({
   meals: mealsReducer,
+  log: logReducer,
 });
 
 const store = createStore(rootReducer);

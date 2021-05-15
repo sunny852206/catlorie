@@ -1,8 +1,8 @@
 class LogItem {
-  constructor(quantity, mealBrand, mealCalorie, sum) {
+  constructor(quantity, mealCalorie, mealBrand, sum) {
     this.quantity = quantity;
-    this.mealBrand = mealBrand;
     this.mealCalorie = mealCalorie;
+    this.mealBrand = mealBrand;
     this.sum = sum;
   }
 }

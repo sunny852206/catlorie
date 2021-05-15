@@ -6,12 +6,17 @@ import {
   Button,
   StyleSheet,
   Modal,
+  Platform,
   TouchableHighlight,
   FlatList,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import HeaderButton from "../components/UI/HeaderButton";
 import MealItem from "../components/log/MealItem";
+import * as logActions from "../store/actions/log";
+import Colors from "../constants/Colors";
 
 import { Picker } from "@react-native-picker/picker";
 import FoodQuickAdd from "../components/FoodQuickAdd";
@@ -25,25 +30,11 @@ import FoodLogInput from "../components/FoodLogInput";
 
 const AddMealScreen = (props) => {
   const meals = useSelector((state) => state.meals.availableMeals);
+  const dispatch = useDispatch();
 
   const [quickFoodList, setQuickFoodList] = useState([]);
   const [isAddMode, setIsAddMode] = useState(false);
   const [foodList, setFoodList] = useState([]);
-
-  // const addFoodHandler = (enteredFood) => {
-  //   setFoodList((currentFood) => [
-  //     ...currentFood,
-  //     {
-  //       id: Math.random().toString(),
-  //       calorie: enteredFood.calorie,
-  //       title: enteredFood.title,
-  //       // test: enteredFood,
-  //     },
-  //   ]);
-  //   // setIsAddMode(false);
-  //   // setFoodList([...foodlist, enteredFood]);
-  //   console.log("Added food:", enteredFood);
-  // };
 
   const addQuickFoodHandler = (foodId) => {
     setQuickFoodList((currentQuickFood) => [
@@ -94,38 +85,6 @@ const AddMealScreen = (props) => {
       </View>
       {/* flatlist */}
       <View>
-        {/* <View style={styles.mealList}>
-          <Text style={styles.listTitle}>Meal</Text>
-          <FlatList
-            keyExtractor={(item, index) => item.id}
-            data={MEAL}
-            renderItem={(itemData) => (
-              <StoredMeal
-                id={itemData.item.id}
-                // onDelete={removeFoodHandler}
-                calorie={itemData.item.calorie}
-                name={itemData.item.title}
-                // test={itemData.item.test}
-              />
-            )}
-          />
-        </View>
-        <View style={styles.treatList}>
-          <Text style={styles.listTitle}>Treat</Text>
-          <FlatList
-            keyExtractor={(item, index) => item.id}
-            data={TREAT}
-            renderItem={(itemData) => (
-              <StoredTreat
-                id={itemData.item.id}
-                // onDelete={removeFoodHandler}
-                calorie={itemData.item.calorie}
-                name={itemData.item.title}
-                // test={itemData.item.test}
-              />
-            )}
-          />
-        </View> */}
         <FlatList
           data={meals}
           keyExtractor={(item) => item.id}
@@ -141,40 +100,45 @@ const AddMealScreen = (props) => {
                   mealBrand: itemData.item.brand,
                 });
               }}
-              onAddToCart={() => {}}
+              onAddToLog={() => {
+                dispatch(logActions.addToLog(itemData.item));
+              }}
             />
           )}
         />
-      </View>
-
-      {/* /// */}
-      <View style={styles.buttonContainer}>
-        <View style={styles.button}>
-          <Button title="CANCEL" color="red" onPress={props.onCancel} />
-        </View>
-        <View style={styles.button}>
-          <Button title="ADD" onPress={addDropDownFoodHandler} />
-        </View>
       </View>
     </View>
   );
 };
 
-AddMealScreen.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Add Meal",
-    // headerLeft: () => (
-    //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
-    //     <Item
-    //       title="Menu"
-    //       iconName="ios-menu"
-    //       onPress={() => {
-    //         navData.navigation.toggleDrawer();
-    //       }}
-    //     />
-    //   </HeaderButtons>
-    // ),
-  };
+AddMealScreen.navigationOptions = {
+  // return {
+  //   headerTitle: "Add Meal",
+  //   // headerLeft: () => (
+  //   //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
+  //   //     <Item
+  //   //       title="Menu"
+  //   //       iconName="ios-menu"
+  //   //       onPress={() => {
+  //   //         navData.navigation.toggleDrawer();
+  //   //       }}
+  //   //     />
+  //   //   </HeaderButtons>
+  //   // ),
+  // };
+  headerTitle: "Add Meal",
+  headerRight: () => (
+    <HeaderButtons HeaderButtonComponent={HeaderButton}>
+      <Item
+        title="Cart"
+        iconName={Platform.OS === "android" ? "md-cart" : "add-circle"}
+        color={Colors.buttonColor}
+        onPress={() => {
+          // navData.navigation.navigate('Cart');
+        }}
+      />
+    </HeaderButtons>
+  ),
 };
 
 const styles = StyleSheet.create({
