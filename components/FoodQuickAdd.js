@@ -20,7 +20,7 @@ const FoodLogInput = (props) => {
   };
 
   const cancelQuickFoodHandler = () => {
-    props.onCancel();
+    // props.onCancel();
     setEnteredFood("");
     console.log("Quick Food Canceled");
   };
@@ -54,7 +54,7 @@ const FoodLogInput = (props) => {
             <TouchableOpacity
               style={{ ...styles.actions, backgroundColor: "#db2828" }}
               // onPressIn={}
-              onPress={cancelQuickFoodHandler}
+              onPress={() => props.navigation.navigate("AddMeal")}
             >
               <Text style={styles.actionText}>CANCEL</Text>
             </TouchableOpacity>

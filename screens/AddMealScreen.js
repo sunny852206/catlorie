@@ -63,8 +63,7 @@ const AddMealScreen = (props) => {
 
   return (
     <View style={styles.screen}>
-      {/* <Button title="Quick Add" onPress={() => setIsAddMode(true)} /> */}
-      <View style={styles.quickAdd}>
+      {/* <View style={styles.quickAdd}>
         <TouchableHighlight
           activeOpacity={0.6}
           underlayColor="#DDDDDD"
@@ -82,8 +81,7 @@ const AddMealScreen = (props) => {
           onAddQuickFood={addQuickFoodHandler}
           onCancel={cancelFoodHandler}
         />
-      </View>
-      {/* flatlist */}
+      </View> */}
       <View>
         <FlatList
           data={meals}
@@ -111,7 +109,7 @@ const AddMealScreen = (props) => {
   );
 };
 
-AddMealScreen.navigationOptions = {
+AddMealScreen.navigationOptions = (props) => {
   // return {
   //   headerTitle: "Add Meal",
   //   // headerLeft: () => (
@@ -126,19 +124,21 @@ AddMealScreen.navigationOptions = {
   //   //   </HeaderButtons>
   //   // ),
   // };
-  headerTitle: "Add Meal",
-  headerRight: () => (
-    <HeaderButtons HeaderButtonComponent={HeaderButton}>
-      <Item
-        title="Cart"
-        iconName={Platform.OS === "android" ? "md-cart" : "add-circle"}
-        color={Colors.buttonColor}
-        onPress={() => {
-          // navData.navigation.navigate('Cart');
-        }}
-      />
-    </HeaderButtons>
-  ),
+  return {
+    headerTitle: "Add Meal",
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Cart"
+          iconName={Platform.OS === "android" ? "md-cart" : "add-circle"}
+          color={Colors.buttonColor}
+          onPress={() => {
+            props.navigation.navigate("QuickAdd");
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
 };
 
 const styles = StyleSheet.create({

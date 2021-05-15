@@ -14,6 +14,7 @@ import PetProfileScreen from "../screens/PetProfileScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 
+import FoodQuickAdd from "../components/FoodQuickAdd";
 import AddMealScreen from "../screens/AddMealScreen";
 import MealDetailScreen from "../screens/MealDetailScreen";
 
@@ -57,6 +58,9 @@ const LogNavigator = createStackNavigator(
     },
     MealDetail: {
       screen: MealDetailScreen,
+    },
+    QuickAdd: {
+      screen: FoodQuickAdd,
     },
   },
   {

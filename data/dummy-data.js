@@ -31,7 +31,7 @@ const MEALS = [
     "m2",
     "u1",
     "Purina",
-    "https://images.pexels.com/photos/6292/blue-pattern-texture-macro.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+    "https://cdn.pixabay.com/photo/2016/03/10/04/45/cans-1247877_960_720.jpg",
     "Chicken Entree in Gravy",
     25.1
   ),
@@ -39,7 +39,7 @@ const MEALS = [
     "m3",
     "u2",
     "American Journey",
-    "https://images.pexels.com/photos/160834/coffee-cup-and-saucer-black-coffee-loose-coffee-beans-160834.jpeg?cs=srgb&dl=bean-beans-black-coffee-160834.jpg&fm=jpg",
+    "https://cdn.pixabay.com/photo/2021/02/15/16/01/pet-food-6018384_1280.jpg",
     "Pate Chicken Recipe",
     96
   ),
@@ -47,7 +47,7 @@ const MEALS = [
     "m4",
     "u3",
     "Wellness",
-    "https://images.pexels.com/photos/46274/pexels-photo-46274.jpeg?cs=srgb&dl=blur-blurred-book-pages-46274.jpg&fm=jpg",
+    "https://cdn.pixabay.com/photo/2014/03/07/10/03/food-bowl-281978_1280.jpg",
     "Chicken & Wild Salmon",
     131
   ),
@@ -55,7 +55,7 @@ const MEALS = [
     "m5",
     "u3",
     "BFF",
-    "https://get.pxhere.com/photo/laptop-computer-macbook-mac-screen-water-board-keyboard-technology-air-mouse-photo-airport-aircraft-tablet-aviation-office-black-monitor-keys-graphic-hardware-image-pc-exhibition-multimedia-calculator-vector-water-cooling-floppy-disk-phased-out-desktop-computer-netbook-personal-computer-computer-monitor-electronic-device-computer-hardware-display-device-448748.jpg",
+    "https://cdn.pixabay.com/photo/2021/02/15/16/01/pet-food-6018383_1280.jpg",
     "Chicken & Pumpkin in Gravy",
     107
   ),
@@ -63,7 +63,7 @@ const MEALS = [
     "m6",
     "u1",
     "Stella & Chewys's",
-    "https://cdn.pixabay.com/photo/2015/10/03/02/14/pen-969298_1280.jpg",
+    "https://cdn.pixabay.com/photo/2015/07/22/13/21/kibble-855419_1280.jpg",
     "Salmon, Tuna & Mackerel",
     62
   ),
