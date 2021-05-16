@@ -77,9 +77,6 @@ const ProfileNavigator = createStackNavigator(
     Profile: ProfileScreen,
   },
   {
-    // navigationOptions: {
-    //   drawerLabel: 'Filters!!!!'
-    // },
     defaultNavigationOptions: defaultStackNavOptions,
   }
 );
@@ -89,9 +86,6 @@ const SettingsNavigator = createStackNavigator(
     Settings: SettingsScreen,
   },
   {
-    // navigationOptions: {
-    //   drawerLabel: 'Filters!!!!'
-    // },
     defaultNavigationOptions: defaultStackNavOptions,
   }
 );
@@ -181,11 +175,39 @@ const MainNavigator = createDrawerNavigator(
     HomeLogProfile: {
       screen: HomeLogProfileTabNavigator,
       navigationOptions: {
+        drawerIcon: (drawerConfig) => (
+          <Ionicons
+            name={Platform.OS === "android" ? "md-list" : "ios-home"}
+            size={23}
+          />
+        ),
         drawerLabel: "Home",
       },
     },
-    Profile: ProfileNavigator,
-    Settings: SettingsNavigator,
+    Profile: {
+      screen: ProfileNavigator,
+      navigationOptions: {
+        drawerIcon: (drawerConfig) => (
+          <Ionicons
+            name={Platform.OS === "android" ? "md-list" : "ios-person"}
+            size={23}
+          />
+        ),
+        drawerLabel: "Profile",
+      },
+    },
+    Settings: {
+      screen: SettingsNavigator,
+      navigationOptions: {
+        drawerIcon: (drawerConfig) => (
+          <Ionicons
+            name={Platform.OS === "android" ? "md-list" : "ios-settings"}
+            size={23}
+          />
+        ),
+        drawerLabel: "Settings",
+      },
+    },
   },
   {
     contentOptions: {

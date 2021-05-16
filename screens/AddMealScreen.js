@@ -18,12 +18,6 @@ import MealItem from "../components/log/MealItem";
 import * as logActions from "../store/actions/log";
 import Colors from "../constants/Colors";
 
-import { Picker } from "@react-native-picker/picker";
-import FoodQuickAdd from "../components/FoodQuickAdd";
-import { Ionicons } from "@expo/vector-icons";
-import { MEAL } from "../data/dummy-data";
-import { TREAT } from "../data/dummy-data";
-
 const AddMealScreen = (props) => {
   const meals = useSelector((state) => state.meals.availableMeals);
   const dispatch = useDispatch();
@@ -58,20 +52,6 @@ const AddMealScreen = (props) => {
 };
 
 AddMealScreen.navigationOptions = (props) => {
-  // return {
-  //   headerTitle: "Add Meal",
-  //   // headerLeft: () => (
-  //   //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
-  //   //     <Item
-  //   //       title="Menu"
-  //   //       iconName="ios-menu"
-  //   //       onPress={() => {
-  //   //         navData.navigation.toggleDrawer();
-  //   //       }}
-  //   //     />
-  //   //   </HeaderButtons>
-  //   // ),
-  // };
   return {
     headerTitle: "Add Meal",
     headerRight: () => (
@@ -91,7 +71,9 @@ AddMealScreen.navigationOptions = (props) => {
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 40,
+    paddingHorizontal: 30,
+    paddingTop: 30,
+
     // flex: 1,
     // justifyContent: "center",
     // alignItems: "center",

@@ -60,7 +60,6 @@ const FoodLogScreen = (props) => {
               quantity={itemData.item.quantity}
               brand={itemData.item.mealBrand}
               calorie={itemData.item.sum}
-              deletable
               onRemove={() => {
                 dispatch(logActions.removeFromLog(itemData.item.mealId));
               }}
