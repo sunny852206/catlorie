@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Colors from "../constants/Colors";
 import LogItem from "../components/log/LogItem";
+import * as logActions from "../store/actions/log";
 
 import HeaderButton from "../components/HeaderButton";
 
@@ -31,13 +32,16 @@ const FoodLogScreen = (props) => {
     }
     return transformedLogItems;
   });
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.screen}>
       <View style={styles.summary}>
         <Text style={styles.summaryText}>
-          Calories:
-          <Text style={styles.totalCalorie}> {logTotalCalorie}kcal</Text>
+          Calories:{" "}
+          <Text style={styles.totalCalorie}>
+            {Math.round(logTotalCalorie.toFixed(2) * 100) / 100}kcal
+          </Text>
         </Text>
         <Button
           title="Add Meal"
@@ -56,7 +60,10 @@ const FoodLogScreen = (props) => {
               quantity={itemData.item.quantity}
               brand={itemData.item.mealBrand}
               calorie={itemData.item.sum}
-              onRemove={() => {}}
+              deletable
+              onRemove={() => {
+                dispatch(logActions.removeFromLog(itemData.item.mealId));
+              }}
             />
           )}
         />
