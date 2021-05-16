@@ -146,7 +146,7 @@ const tabScreenConfig = {
         ),
       tabBarOptions: {
         style: { height: 55 },
-        activeTintColor: Colors.accprimaryColorentColor,
+        activeTintColor: Colors.primaryColor,
       },
     },
   },
