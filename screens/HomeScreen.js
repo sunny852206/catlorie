@@ -28,14 +28,14 @@ const HomeScreen = (props) => {
           />
         </View>
         <Text style={styles.petName}>
-          PumpKin
+          PumpKin {""}
           <Ionicons
             name={Platform.OS === "android" ? "md-list" : "ios-male"}
             size={23}
           />
         </Text>
 
-        <Text style={styles.petAge}> 6 years old</Text>
+        <Text style={styles.petAge}> 6 years old </Text>
       </View>
       <View style={styles.contentContainer}>
         <View>
