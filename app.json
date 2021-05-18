@@ -4,9 +4,17 @@
     "slug": "catlorie",
     "version": "1.0.0",
     "orientation": "portrait",
+<<<<<<< HEAD
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
+=======
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash.png",
+>>>>>>> 049f7a204982c277c490ef07db75461626918b96
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,12 +29,21 @@
     },
     "android": {
       "adaptiveIcon": {
+<<<<<<< HEAD
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+=======
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+>>>>>>> 049f7a204982c277c490ef07db75461626918b96
     }
   }
 }
