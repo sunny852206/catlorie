@@ -40,7 +40,7 @@ const FoodLogScreen = (props) => {
         <Text style={styles.summaryText}>
           Calories:{" "}
           <Text style={styles.totalCalorie}>
-            {Math.round(logTotalCalorie.toFixed(2) * 100) / 100}kcal
+            {Math.round(logTotalCalorie.toFixed(2) * 100) / 100} kcal
           </Text>
         </Text>
         <Button
