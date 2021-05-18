@@ -1,38 +1,90 @@
-import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Platform, Text, Button, StyleSheet, Image } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import { Ionicons } from "@expo/vector-icons";
+import Colors from "../constants/Colors";
 import HeaderButton from "../components/HeaderButton";
+import ProgressCircle from "react-native-progress-circle";
+
+import { useSelector, useDispatch } from "react-redux";
 
 const HomeScreen = (props) => {
-  console.log(props);
+  const [currentDate, setceurrentDate] = useState("");
+
+  const targetCalorie = 250;
+  const logTotalCalorie = useSelector((state) => state.log.totalCalorie);
+  const consumedCalorie = Math.round(logTotalCalorie.toFixed(0) * 100) / 100;
+  const consumedCalPct = (consumedCalorie / targetCalorie) * 100;
+  const remainCalorie = targetCalorie - consumedCalorie;
+
+  useEffect(() => {
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+    // var hours = new Date().getHours();
+    // var min = new Date().getMinutes();
+    // var sec = new Date().getSeconds();
+    setceurrentDate(month + " / " + date + " / " + year + " ");
+  }, []);
+
   return (
     <View style={styles.screen}>
-      <Text>The Home Screen!</Text>
-      <Button
-        title="My pets"
-        onPress={() => {
-          props.navigation.navigate({ routeName: "CategoryMeals" });
-        }}
-      />
-      <Button
-        title="Food"
-        onPress={() => {
-          props.navigation.navigate({ routeName: "CategoryMeals" });
-        }}
-      />
-      <Button
-        title="Calender"
-        onPress={() => {
-          props.navigation.navigate({ routeName: "CategoryMeals" });
-        }}
-      />
-      <Button
-        title="Moment"
-        onPress={() => {
-          props.navigation.navigate({ routeName: "CategoryMeals" });
-        }}
-      />
+      <View style={styles.petInfo}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg",
+            }}
+          />
+        </View>
+        <Text style={styles.petName}>
+          Pumpkin{" "}
+          <Ionicons
+            name={Platform.OS === "android" ? "md-list" : "ios-male"}
+            size={23}
+          />
+        </Text>
+
+        <Text style={styles.petAge}> 6 years old </Text>
+      </View>
+      <View style={styles.contentContainer}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginHorizontal: 20,
+            marginBottom: 10,
+          }}
+        >
+          <Text style={styles.calorieTitle}>Calorie</Text>
+          <Text style={styles.date}>{currentDate}</Text>
+        </View>
+
+        <View style={styles.calorieContainer}>
+          <ProgressCircle
+            percent={consumedCalPct}
+            radius={135}
+            borderWidth={15}
+            color={Colors.cardColor}
+            shadowColor="#ddd"
+            bgColor="#fff"
+          >
+            <Text style={styles.calorieNum}>
+              {remainCalorie}/{targetCalorie}
+            </Text>
+            <Text style={styles.calorieText}>kcal remaining</Text>
+          </ProgressCircle>
+        </View>
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.calorieTextColor}>
+            {consumedCalorie}{" "}
+            <Text style={styles.calorieTextNoColor}>consumed</Text>
+          </Text>
+        </View>
+      </View>
     </View>
   );
 };
@@ -54,28 +106,106 @@ HomeScreen.navigationOptions = (navData) => {
   };
 };
 
-// HomeScreen.navigationOptions = (navData) => {
-//   return {
-//     headerTitle: "Meal Categories",
-//     headerLeft: (
-//       <HeaderButtons HeaderButtonComponent={HeaderButton}>
-//         <Item
-//           title="Menu"
-//           iconName="ios-menu"
-//           onPress={() => {
-//             navData.navigation.toggleDrawer();
-//           }}
-//         />
-//       </HeaderButtons>
-//     ),
-//   };
-// };
-
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    flexDirection: "column",
+  },
+  petInfo: {
+    flex: 1.8,
+    marginVertical: 10,
+    marginHorizontal: 20,
+    backgroundColor: "white",
+    // justifyContent: "center",
+    // alignItems: "center",
+    borderRadius: 40,
+    shadowColor: "black",
+    shadowOpacity: 0.15,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 1.5,
+    elevation: 5,
+  },
+  petName: {
+    fontSize: 25,
+    // justifyContent: "flex-end",
+    marginHorizontal: 20,
+    fontFamily: "open-sans-bold",
+    // paddingBottom: 10,
+  },
+  petAge: {
+    fontSize: 15,
+    marginHorizontal: 20,
+    fontFamily: "open-sans-bold",
+    color: "#aeaeae",
+    paddingBottom: 20,
+  },
+  calorieTitle: {
+    fontSize: 25,
+    // marginHorizontal: 15,
+    marginTop: 20,
+    fontFamily: "open-sans-bold",
+  },
+  date: {
+    marginTop: 15,
+    fontSize: 18,
+    fontFamily: "open-sans-bold",
+    // color: "#575757",
+  },
+  imageContainer: {
+    flex: 1,
+    // marginVertical: 10,
+    // marginHorizontal: 10,
+    // backgroundColor: "red",
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 40,
+  },
+  contentContainer: {
+    flex: 2.5,
+    backgroundColor: "#fff",
+    // justifyContent: "center",
+    // alignItems: "center",
+    borderRadius: 40,
+    marginBottom: 10,
+    marginHorizontal: 20,
+    shadowColor: "black",
+    shadowOpacity: 0.15,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 1.5,
+    elevation: 5,
+  },
+  calorieContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+    // marginTop: -120,
+    // marginVertical: 15,
+  },
+  image: {
+    width: "95%",
+    height: "95%",
+    borderRadius: 40,
+  },
+  calorieText: {
+    fontSize: 18,
+    fontFamily: "open-sans-bold",
+    color: "#575757",
+  },
+  calorieTextColor: {
+    fontSize: 18,
+    fontFamily: "open-sans-bold",
+    color: Colors.primaryColor,
+  },
+  calorieTextNoColor: {
+    fontSize: 18,
+    fontFamily: "open-sans-bold",
+    color: "#575757",
+  },
+
+  calorieNum: {
+    fontSize: 50,
+    fontFamily: "open-sans-bold",
+    color: Colors.primaryColor,
   },
 });
 

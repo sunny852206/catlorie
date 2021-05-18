@@ -1,21 +1,81 @@
-import React from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useSelector, useDispatch } from "react-redux";
+
+import Colors from "../constants/Colors";
+import LogItem from "../components/log/LogItem";
+import * as logActions from "../store/actions/log";
 
 import HeaderButton from "../components/HeaderButton";
+
 const FoodLogScreen = (props) => {
+  const logTotalCalorie = useSelector((state) => state.log.totalCalorie);
+  const logItems = useSelector((state) => {
+    const transformedLogItems = [];
+    for (const key in state.log.items) {
+      transformedLogItems.push({
+        mealId: key,
+        mealBrand: state.log.items[key].mealBrand,
+        mealCalorie: state.log.items[key].mealCalorie,
+        quantity: state.log.items[key].quantity,
+        sum: state.log.items[key].sum,
+      });
+    }
+    return transformedLogItems;
+  });
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.screen}>
-      <Text>Food Log Screen!</Text>
-      <Button
-        title="LOG Button(WIP)!"
-        onPress={() => {
-          //props.navigation.navigate({ routeName: "MealDetail" });
-        }}
-      />
+      <View style={styles.summary}>
+        <Text style={styles.summaryText}>
+          Calories:{" "}
+          <Text style={styles.totalCalorie}>
+            {Math.round(logTotalCalorie.toFixed(2) * 100) / 100} kcal
+          </Text>
+        </Text>
+        <Button
+          title="Add Meal"
+          onPress={() => {
+            props.navigation.navigate({ routeName: "AddMeal" });
+          }}
+          color={Colors.buttonColor}
+        />
+      </View>
+      <View>
+        <FlatList
+          data={logItems}
+          keyExtractor={(item) => item.mealId}
+          renderItem={(itemData) => (
+            <LogItem
+              quantity={itemData.item.quantity}
+              brand={itemData.item.mealBrand}
+              calorie={itemData.item.sum}
+              onRemove={() => {
+                dispatch(logActions.removeFromLog(itemData.item.mealId));
+              }}
+            />
+          )}
+        />
+      </View>
     </View>
   );
 };
+
+// mealId: key,
+// mealBrand: state.log.items[key].mealBrand,
+// mealCalorie: state.log.items[key].mealCalorie,
+// quantity: state.log.items[key].quantity,
+// sum: state.log.items[key].sum,
 
 FoodLogScreen.navigationOptions = (navData) => {
   return {
@@ -36,9 +96,32 @@ FoodLogScreen.navigationOptions = (navData) => {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
-    justifyContent: "center",
+    margin: 20,
+    // padding: 50,
+    // // flex: 1,
+    // // justifyContent: "center",
+    // // alignItems: "center",
+  },
+  summary: {
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 20,
+    padding: 15,
+    shadowColor: "black",
+    shadowOpacity: 0.15,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 1.5,
+    elevation: 5,
+    borderRadius: 10,
+    backgroundColor: "white",
+  },
+  summaryText: {
+    fontFamily: "open-sans-bold",
+    fontSize: 18,
+  },
+  totalCalorie: {
+    color: Colors.primaryColor,
   },
 });
 

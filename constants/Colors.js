@@ -1,4 +1,7 @@
 export default {
-  primaryColor: "#4a148c",
-  accentColor: "#ff6f00",
+  primaryColor: "#008b8b",
+  accentColor: "#008b8b",
+  cardColor: "#abded0",
+  buttonColor: "#cc7000",
+  titleColor: "#111614",
 };

@@ -13,15 +13,16 @@ import FoodLogScreen from "../screens/FoodLogScreen";
 import PetProfileScreen from "../screens/PetProfileScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-import Colors from "../constants/Colors";
 
-// import CategoriesScreen from "../screens/CategoriesScreen";
-// import CategoryMealsScreen from "../screens/CategoryMealsScreen";
-// import MealDetailScreen from "../screens/MealDetailScreen";
+import FoodQuickAdd from "../components/FoodQuickAdd";
+import AddMealScreen from "../screens/AddMealScreen";
+import MealDetailScreen from "../screens/MealDetailScreen";
+
+import Colors from "../constants/Colors";
 
 const defaultStackNavOptions = {
   headerStyle: {
-    backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
+    backgroundColor: Platform.OS === "android" ? Colors.titleColor : "",
   },
   headerTitleStyle: {
     fontFamily: "open-sans-bold",
@@ -29,7 +30,7 @@ const defaultStackNavOptions = {
   headerBackTitleStyle: {
     fontFamily: "open-sans",
   },
-  headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
+  headerTintColor: Platform.OS === "android" ? "white" : Colors.titleColor,
   headerTitle: "A Screen",
 };
 
@@ -38,17 +39,26 @@ const HomeNavigator = createStackNavigator(
     Home: HomeScreen,
   },
   {
-    // initialRouteName: 'Categories',
     defaultNavigationOptions: defaultStackNavOptions,
   }
 );
 
 const LogNavigator = createStackNavigator(
   {
-    FoodLog: FoodLogScreen,
+    FoodLog: {
+      screen: FoodLogScreen,
+    },
+    AddMeal: {
+      screen: AddMealScreen,
+    },
+    MealDetail: {
+      screen: MealDetailScreen,
+    },
+    QuickAdd: {
+      screen: FoodQuickAdd,
+    },
   },
   {
-    // initialRouteName: 'Categories',
     defaultNavigationOptions: defaultStackNavOptions,
   }
 );
@@ -58,7 +68,6 @@ const PetNavigator = createStackNavigator(
     PetProfile: PetProfileScreen,
   },
   {
-    // initialRouteName: 'Categories',
     defaultNavigationOptions: defaultStackNavOptions,
   }
 );
@@ -68,9 +77,6 @@ const ProfileNavigator = createStackNavigator(
     Profile: ProfileScreen,
   },
   {
-    // navigationOptions: {
-    //   drawerLabel: 'Filters!!!!'
-    // },
     defaultNavigationOptions: defaultStackNavOptions,
   }
 );
@@ -80,9 +86,6 @@ const SettingsNavigator = createStackNavigator(
     Settings: SettingsScreen,
   },
   {
-    // navigationOptions: {
-    //   drawerLabel: 'Filters!!!!'
-    // },
     defaultNavigationOptions: defaultStackNavOptions,
   }
 );
@@ -101,6 +104,10 @@ const tabScreenConfig = {
         ) : (
           "Home"
         ),
+      tabBarOptions: {
+        activeTintColor: Colors.primaryColor,
+        style: { height: 55 },
+      },
     },
   },
   FoodLog: {
@@ -111,13 +118,17 @@ const tabScreenConfig = {
           <Ionicons name="ios-restaurant" size={25} color={tabInfo.tintColor} />
         );
       },
-      tabBarColor: Colors.accentColor,
       tabBarLabel:
         Platform.OS === "android" ? (
           <Text style={{ fontFamily: "open-sans-bold" }}>Favorites</Text>
         ) : (
           "Log"
         ),
+      tabBarOptions: {
+        activeTintColor: Colors.primaryColor,
+
+        style: { height: 55 },
+      },
     },
   },
   PetProfile: {
@@ -133,6 +144,10 @@ const tabScreenConfig = {
         ) : (
           "Profile"
         ),
+      tabBarOptions: {
+        style: { height: 55 },
+        activeTintColor: Colors.primaryColor,
+      },
     },
   },
 };
@@ -151,7 +166,7 @@ const HomeLogProfileTabNavigator =
           labelStyle: {
             fontFamily: "open-sans",
           },
-          activeTintColor: Colors.accentColor,
+          activeTintColor: "Colors.accentColor",
         },
       });
 
@@ -160,14 +175,45 @@ const MainNavigator = createDrawerNavigator(
     HomeLogProfile: {
       screen: HomeLogProfileTabNavigator,
       navigationOptions: {
+        drawerIcon: (drawerConfig) => (
+          <Ionicons
+            name={Platform.OS === "android" ? "md-list" : "ios-home"}
+            size={23}
+          />
+        ),
         drawerLabel: "Home",
       },
     },
-    Profile: ProfileNavigator,
-    Settings: SettingsNavigator,
+    Profile: {
+      screen: ProfileNavigator,
+      navigationOptions: {
+        drawerIcon: (drawerConfig) => (
+          <Ionicons
+            name={Platform.OS === "android" ? "md-list" : "ios-person"}
+            size={23}
+          />
+        ),
+        drawerLabel: "Profile",
+      },
+    },
+    Settings: {
+      screen: SettingsNavigator,
+      navigationOptions: {
+        drawerIcon: (drawerConfig) => (
+          <Ionicons
+            name={Platform.OS === "android" ? "md-list" : "ios-settings"}
+            size={23}
+          />
+        ),
+        drawerLabel: "Settings",
+      },
+    },
   },
   {
     contentOptions: {
+      itemsContainerStyle: {
+        marginTop: 18,
+      },
       activeTintColor: Colors.accentColor,
       labelStyle: {
         fontFamily: "open-sans-bold",
@@ -175,14 +221,5 @@ const MainNavigator = createDrawerNavigator(
     },
   }
 );
-
-// const Navigator = createStackNavigator({
-//   Home: HomeScreen,
-//   Categories: CategoriesScreen,
-//   CategoryMeals: {
-//     screen: CategoryMealsScreen,
-//   },
-//   MealDetail: MealDetailScreen,
-// });
 
 export default createAppContainer(MainNavigator);
