@@ -1,7 +1,9 @@
 import React from "react";
-import { View, Text, Button, StyleSheet, Image } from "react-native";
+import { View, Platform, Text, Button, StyleSheet, Image } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
+import { Ionicons } from "@expo/vector-icons";
+import Colors from "../constants/Colors";
 import HeaderButton from "../components/HeaderButton";
 import ProgressCircle from "react-native-progress-circle";
 
@@ -16,32 +18,48 @@ const HomeScreen = (props) => {
 
   return (
     <View style={styles.screen}>
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg",
-          }}
-        />
+      <View style={styles.petInfo}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg",
+            }}
+          />
+        </View>
+        <Text style={styles.petName}>
+          PumpKin
+          <Ionicons
+            name={Platform.OS === "android" ? "md-list" : "ios-male"}
+            size={23}
+          />
+        </Text>
+
+        <Text style={styles.petAge}> 6 years old</Text>
       </View>
       <View style={styles.contentContainer}>
+        <View>
+          <Text style={styles.calorieTitle}> Calorie</Text>
+        </View>
         <View style={styles.calorieContainer}>
-          <Text style={{ fontSize: 30, fontFamily: "open-sans-bold" }}>
-            Calorie
-          </Text>
           <ProgressCircle
             percent={consumedCalPct}
-            radius={150}
-            borderWidth={25}
-            color="#3399FF"
-            shadowColor="#999"
+            radius={135}
+            borderWidth={15}
+            color={Colors.cardColor}
+            shadowColor="#ddd"
             bgColor="#fff"
           >
-            <Text style={styles.calorieTitle}>{remainCalorie}</Text>
+            <Text style={styles.calorieNum}>{remainCalorie}</Text>
             <Text style={styles.calorieText}>remaining</Text>
           </ProgressCircle>
         </View>
-        <Text style={styles.calorieText}>{consumedCalorie} consumed</Text>
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.calorieText}>
+            {consumedCalorie}{" "}
+            <Text style={styles.calorieTextNoColor}>consumed</Text>
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -69,32 +87,92 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
+  petInfo: {
+    flex: 1.8,
+    marginVertical: 10,
+    marginHorizontal: 20,
+    backgroundColor: "white",
+    // justifyContent: "center",
+    // alignItems: "center",
+    borderRadius: 40,
+    shadowColor: "black",
+    shadowOpacity: 0.15,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 1.5,
+    elevation: 5,
+  },
+  petName: {
+    fontSize: 25,
+    justifyContent: "flex-end",
+    marginHorizontal: 20,
+    fontFamily: "open-sans-bold",
+    // paddingBottom: 10,
+  },
+  petAge: {
+    fontSize: 15,
+    marginHorizontal: 20,
+    fontFamily: "open-sans-bold",
+    color: "#aeaeae",
+    paddingBottom: 20,
+  },
+  calorieTitle: {
+    fontSize: 25,
+    marginHorizontal: 15,
+    marginTop: 15,
+    marginBottom: 10,
+    fontFamily: "open-sans-bold",
+  },
   imageContainer: {
     flex: 1,
-    backgroundColor: "red",
+    // marginVertical: 10,
+    // marginHorizontal: 10,
+    // backgroundColor: "red",
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 40,
   },
   contentContainer: {
     flex: 2.5,
     backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
+    // justifyContent: "center",
+    // alignItems: "center",
+    borderRadius: 40,
+    marginBottom: 10,
+    marginHorizontal: 20,
+    shadowColor: "black",
+    shadowOpacity: 0.15,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 1.5,
+    elevation: 5,
   },
   calorieContainer: {
-    marginTop: -120,
-    marginVertical: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingBottom: 10,
+
+    // marginTop: -120,
+    // marginVertical: 15,
   },
   image: {
-    width: 500,
-    height: 300,
+    width: "95%",
+    height: "95%",
+    borderRadius: 40,
   },
-  calorieText: { fontSize: 18, fontFamily: "open-sans-bold" },
-  calorieTitle: {
+  calorieText: {
+    fontSize: 18,
+    fontFamily: "open-sans-bold",
+    color: "#575757",
+  },
+  calorieTextNoColor: {
+    fontSize: 18,
+    fontFamily: "open-sans-bold",
+    color: "#575757",
+  },
+
+  calorieNum: {
     fontSize: 55,
     fontFamily: "open-sans-bold",
+    color: Colors.primaryColor,
   },
 });
 
