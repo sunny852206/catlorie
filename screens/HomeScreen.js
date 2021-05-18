@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Platform, Text, Button, StyleSheet, Image } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
@@ -10,11 +10,23 @@ import ProgressCircle from "react-native-progress-circle";
 import { useSelector, useDispatch } from "react-redux";
 
 const HomeScreen = (props) => {
+  const [currentDate, setceurrentDate] = useState("");
+
   const targetCalorie = 250;
   const logTotalCalorie = useSelector((state) => state.log.totalCalorie);
   const consumedCalorie = Math.round(logTotalCalorie.toFixed(0) * 100) / 100;
   const consumedCalPct = (consumedCalorie / targetCalorie) * 100;
   const remainCalorie = targetCalorie - consumedCalorie;
+
+  useEffect(() => {
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+    // var hours = new Date().getHours();
+    // var min = new Date().getMinutes();
+    // var sec = new Date().getSeconds();
+    setceurrentDate(month + " / " + date + " / " + year + " ");
+  }, []);
 
   return (
     <View style={styles.screen}>
@@ -28,7 +40,7 @@ const HomeScreen = (props) => {
           />
         </View>
         <Text style={styles.petName}>
-          PumpKin {""}
+          Pumpkin{" "}
           <Ionicons
             name={Platform.OS === "android" ? "md-list" : "ios-male"}
             size={23}
@@ -38,9 +50,19 @@ const HomeScreen = (props) => {
         <Text style={styles.petAge}> 6 years old </Text>
       </View>
       <View style={styles.contentContainer}>
-        <View>
-          <Text style={styles.calorieTitle}> Calorie</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginHorizontal: 20,
+            marginBottom: 10,
+          }}
+        >
+          <Text style={styles.calorieTitle}>Calorie</Text>
+          <Text style={styles.date}>{currentDate}</Text>
         </View>
+
         <View style={styles.calorieContainer}>
           <ProgressCircle
             percent={consumedCalPct}
@@ -50,12 +72,14 @@ const HomeScreen = (props) => {
             shadowColor="#ddd"
             bgColor="#fff"
           >
-            <Text style={styles.calorieNum}>{remainCalorie}</Text>
-            <Text style={styles.calorieText}>remaining</Text>
+            <Text style={styles.calorieNum}>
+              {remainCalorie}/{targetCalorie}
+            </Text>
+            <Text style={styles.calorieText}>kcal remaining</Text>
           </ProgressCircle>
         </View>
         <View style={{ alignItems: "center" }}>
-          <Text style={styles.calorieText}>
+          <Text style={styles.calorieTextColor}>
             {consumedCalorie}{" "}
             <Text style={styles.calorieTextNoColor}>consumed</Text>
           </Text>
@@ -103,7 +127,7 @@ const styles = StyleSheet.create({
   },
   petName: {
     fontSize: 25,
-    justifyContent: "flex-end",
+    // justifyContent: "flex-end",
     marginHorizontal: 20,
     fontFamily: "open-sans-bold",
     // paddingBottom: 10,
@@ -117,10 +141,15 @@ const styles = StyleSheet.create({
   },
   calorieTitle: {
     fontSize: 25,
-    marginHorizontal: 15,
-    marginTop: 15,
-    marginBottom: 10,
+    // marginHorizontal: 15,
+    marginTop: 20,
     fontFamily: "open-sans-bold",
+  },
+  date: {
+    marginTop: 15,
+    fontSize: 18,
+    fontFamily: "open-sans-bold",
+    // color: "#575757",
   },
   imageContainer: {
     flex: 1,
@@ -148,8 +177,7 @@ const styles = StyleSheet.create({
   calorieContainer: {
     justifyContent: "center",
     alignItems: "center",
-    paddingBottom: 10,
-
+    paddingVertical: 10,
     // marginTop: -120,
     // marginVertical: 15,
   },
@@ -163,6 +191,11 @@ const styles = StyleSheet.create({
     fontFamily: "open-sans-bold",
     color: "#575757",
   },
+  calorieTextColor: {
+    fontSize: 18,
+    fontFamily: "open-sans-bold",
+    color: Colors.primaryColor,
+  },
   calorieTextNoColor: {
     fontSize: 18,
     fontFamily: "open-sans-bold",
@@ -170,7 +203,7 @@ const styles = StyleSheet.create({
   },
 
   calorieNum: {
-    fontSize: 55,
+    fontSize: 50,
     fontFamily: "open-sans-bold",
     color: Colors.primaryColor,
   },

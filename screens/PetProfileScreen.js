@@ -123,9 +123,10 @@ const styles = StyleSheet.create({
   petBreed: {
     fontSize: 15,
     paddingHorizontal: 25,
-    paddingTop: 10,
-    paddingBottom: 35,
+    paddingTop: 5,
+    paddingBottom: 30,
     color: "#aeaeae",
+    fontFamily: "open-sans-bold",
   },
   desTitle: {
     fontSize: 28,
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   infoText: {
-    fontSize: 13,
+    fontSize: 15,
     fontFamily: "open-sans-bold",
     textAlign: "center",
     color: "#fff",
@@ -160,7 +161,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.cardColor,
     marginHorizontal: 18,
     marginBottom: 15,
-    width: "40%",
+    width: "38%",
     borderRadius: 25,
     shadowColor: "black",
     shadowOpacity: 0.15,

@@ -22,7 +22,7 @@ import Colors from "../constants/Colors";
 
 const defaultStackNavOptions = {
   headerStyle: {
-    backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
+    backgroundColor: Platform.OS === "android" ? Colors.titleColor : "",
   },
   headerTitleStyle: {
     fontFamily: "open-sans-bold",
@@ -30,7 +30,7 @@ const defaultStackNavOptions = {
   headerBackTitleStyle: {
     fontFamily: "open-sans",
   },
-  headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
+  headerTintColor: Platform.OS === "android" ? "white" : Colors.titleColor,
   headerTitle: "A Screen",
 };
 

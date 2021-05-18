@@ -3,4 +3,5 @@ export default {
   accentColor: "#008b8b",
   cardColor: "#abded0",
   buttonColor: "#cc7000",
+  titleColor: "#111614",
 };
