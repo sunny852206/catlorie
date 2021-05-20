@@ -1,6 +1,6 @@
 import React from "react";
 import { Platform, Text } from "react-native";
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator } from "react-navigation-drawer";
@@ -13,6 +13,7 @@ import FoodLogScreen from "../screens/FoodLogScreen";
 import PetProfileScreen from "../screens/PetProfileScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import AuthScreen from "../screens/user/AuthScreen";
 
 import FoodQuickAdd from "../components/FoodQuickAdd";
 import AddMealScreen from "../screens/AddMealScreen";
@@ -20,7 +21,7 @@ import MealDetailScreen from "../screens/MealDetailScreen";
 
 import Colors from "../constants/Colors";
 
-const defaultStackNavOptions = {
+const defaultNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS === "android" ? Colors.titleColor : "",
   },
@@ -39,7 +40,7 @@ const HomeNavigator = createStackNavigator(
     Home: HomeScreen,
   },
   {
-    defaultNavigationOptions: defaultStackNavOptions,
+    defaultNavigationOptions: defaultNavOptions,
   }
 );
 
@@ -59,7 +60,7 @@ const LogNavigator = createStackNavigator(
     },
   },
   {
-    defaultNavigationOptions: defaultStackNavOptions,
+    defaultNavigationOptions: defaultNavOptions,
   }
 );
 
@@ -68,7 +69,7 @@ const PetNavigator = createStackNavigator(
     PetProfile: PetProfileScreen,
   },
   {
-    defaultNavigationOptions: defaultStackNavOptions,
+    defaultNavigationOptions: defaultNavOptions,
   }
 );
 
@@ -77,7 +78,7 @@ const ProfileNavigator = createStackNavigator(
     Profile: ProfileScreen,
   },
   {
-    defaultNavigationOptions: defaultStackNavOptions,
+    defaultNavigationOptions: defaultNavOptions,
   }
 );
 
@@ -86,7 +87,7 @@ const SettingsNavigator = createStackNavigator(
     Settings: SettingsScreen,
   },
   {
-    defaultNavigationOptions: defaultStackNavOptions,
+    defaultNavigationOptions: defaultNavOptions,
   }
 );
 
@@ -102,7 +103,7 @@ const tabScreenConfig = {
         Platform.OS === "android" ? (
           <Text style={{ fontFamily: "open-sans-bold" }}>Meals</Text>
         ) : (
-          "Home"
+          "Home!"
         ),
       tabBarOptions: {
         activeTintColor: Colors.primaryColor,
@@ -170,7 +171,16 @@ const HomeLogProfileTabNavigator =
         },
       });
 
-const MainNavigator = createDrawerNavigator(
+const AuthNavigator = createStackNavigator(
+  {
+    Auth: AuthScreen,
+  },
+  {
+    defaultNavigationOptions: defaultNavOptions,
+  }
+);
+
+const CatlorieNavigator = createDrawerNavigator(
   {
     HomeLogProfile: {
       screen: HomeLogProfileTabNavigator,
@@ -221,5 +231,10 @@ const MainNavigator = createDrawerNavigator(
     },
   }
 );
+
+const MainNavigator = createSwitchNavigator({
+  Auth: AuthNavigator,
+  Catlorie: CatlorieNavigator,
+});
 
 export default createAppContainer(MainNavigator);
