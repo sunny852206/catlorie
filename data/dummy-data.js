@@ -33,7 +33,7 @@ const MEALS = [
     "Purina",
     "https://cdn.pixabay.com/photo/2016/03/10/04/45/cans-1247877_960_720.jpg",
     "Chicken Entree in Gravy",
-    25.1
+    25
   ),
   new Meal(
     "m3",
@@ -41,7 +41,7 @@ const MEALS = [
     "American Journey",
     "https://cdn.pixabay.com/photo/2021/02/15/16/01/pet-food-6018384_1280.jpg",
     "Pate Chicken Recipe",
-    96
+    66
   ),
   new Meal(
     "m4",
@@ -49,7 +49,7 @@ const MEALS = [
     "Wellness",
     "https://cdn.pixabay.com/photo/2014/03/07/10/03/food-bowl-281978_1280.jpg",
     "Chicken & Wild Salmon",
-    131
+    51
   ),
   new Meal(
     "m5",
@@ -57,7 +57,7 @@ const MEALS = [
     "BFF",
     "https://cdn.pixabay.com/photo/2021/02/15/16/01/pet-food-6018383_1280.jpg",
     "Chicken & Pumpkin in Gravy",
-    107
+    87
   ),
   new Meal(
     "m6",

@@ -1,13 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { View, Platform, Text, Button, StyleSheet, Image } from "react-native";
+import {
+  View,
+  ScrollView,
+  Platform,
+  Text,
+  Button,
+  StyleSheet,
+  Image,
+} from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 import HeaderButton from "../components/HeaderButton";
 import ProgressCircle from "react-native-progress-circle";
+import * as Notifications from "expo-notifications";
 
 import { useSelector, useDispatch } from "react-redux";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 const HomeScreen = (props) => {
   const [currentDate, setceurrentDate] = useState("");
@@ -15,8 +32,28 @@ const HomeScreen = (props) => {
   const targetCalorie = 250;
   const logTotalCalorie = useSelector((state) => state.log.totalCalorie);
   const consumedCalorie = Math.round(logTotalCalorie.toFixed(0) * 100) / 100;
-  const consumedCalPct = (consumedCalorie / targetCalorie) * 100;
+  const consumedCalPct = (consumedCalorie / targetCalorie).toFixed(2) * 100;
   const remainCalorie = targetCalorie - consumedCalorie;
+
+  async function calorieRemindsNotification() {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "About to reach target calorie intake!",
+        body: "Remaining calorie: " + remainCalorie + " kcal",
+      },
+      trigger: null,
+    });
+  }
+
+  async function calorieExceedNotification() {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Calorie intake target achieved!",
+        body: "Calorie intake exceeded by " + consumedCalPct + "%",
+      },
+      trigger: null,
+    });
+  }
 
   useEffect(() => {
     var date = new Date().getDate();
@@ -27,6 +64,15 @@ const HomeScreen = (props) => {
     // var sec = new Date().getSeconds();
     setceurrentDate(month + " / " + date + " / " + year + " ");
   }, []);
+
+  if (
+    logTotalCalorie / targetCalorie >= 0.75 &&
+    logTotalCalorie < targetCalorie
+  ) {
+    calorieRemindsNotification();
+  } else if (logTotalCalorie > targetCalorie) {
+    calorieExceedNotification();
+  }
 
   return (
     <View style={styles.screen}>
@@ -49,6 +95,7 @@ const HomeScreen = (props) => {
 
         <Text style={styles.petAge}> 6 years old </Text>
       </View>
+
       <View style={styles.contentContainer}>
         <View
           style={{
@@ -80,8 +127,8 @@ const HomeScreen = (props) => {
         </View>
         <View style={{ alignItems: "center" }}>
           <Text style={styles.calorieTextColor}>
-            {consumedCalorie}{" "}
-            <Text style={styles.calorieTextNoColor}>consumed</Text>
+            {consumedCalorie}
+            <Text style={styles.calorieTextNoColor}> kcal consumed</Text>
           </Text>
         </View>
       </View>

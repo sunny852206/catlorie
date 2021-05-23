@@ -233,7 +233,7 @@ const CatlorieNavigator = createDrawerNavigator(
 );
 
 const MainNavigator = createSwitchNavigator({
-  Auth: AuthNavigator,
+  // Auth: AuthNavigator,
   Catlorie: CatlorieNavigator,
 });
 

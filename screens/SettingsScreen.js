@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
@@ -8,12 +8,12 @@ const SettingsScreen = (props) => {
   return (
     <View style={styles.screen}>
       <Text>Settings Screen!</Text>
-      <Button
-        title="(WIP)!"
-        onPress={() => {
-          //props.navigation.navigate({ routeName: "MealDetail" });
-        }}
-      />
+      {/* <View>
+        <Button
+          title="Trigger Notification"
+          onPress={triggerNotificationHandler}
+        />
+      </View> */}
     </View>
   );
 };
