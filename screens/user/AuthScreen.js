@@ -1,10 +1,10 @@
 import React, { useState, useReducer, useCallback } from "react";
 import {
   ScrollView,
+  View,
   KeyboardAvoidingView,
   StyleSheet,
   Button,
-  View,
 } from "react-native";
 import { useDispatch } from "react-redux";
 
@@ -118,6 +118,8 @@ const AuthScreen = (props) => {
               color={Colors.primaryColor}
               onPress={authHandler}
             />
+          </View>
+          <View style={styles.buttonContainer}>
             <Button
               title={`Switch to ${isSignup ? "Login" : "Sign Up"}`}
               color={Colors.buttonColor}
