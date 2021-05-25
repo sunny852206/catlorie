@@ -6,8 +6,6 @@ import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import ReduxThunk from "redux-thunk";
 import Constants from "expo-constants";
-import * as Notifications from "expo-notifications";
-
 import mealsReducer from "./store/reducers/meals";
 import logReducer from "./store/reducers/log";
 import HomeNavigator from "./navigation/HomeNavigator";
@@ -25,24 +23,6 @@ const fetchFonts = () => {
     "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
   });
 };
-
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
-
-Notifications.scheduleNotificationAsync({
-  content: {
-    title: "Pet feeding reminder",
-    body: "Don't forget to log meals for your furry friends!",
-  },
-  trigger: {
-    seconds: 5,
-  },
-});
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);

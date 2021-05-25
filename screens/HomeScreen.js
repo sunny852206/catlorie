@@ -59,6 +59,17 @@ const HomeScreen = (props) => {
     var date = new Date().getDate();
     var month = new Date().getMonth() + 1;
     var year = new Date().getFullYear();
+
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Pet feeding reminder",
+        body: "Don't forget to log meals for your furry friends!",
+      },
+      trigger: {
+        seconds: 3,
+      },
+    });
+
     // var hours = new Date().getHours();
     // var min = new Date().getMinutes();
     // var sec = new Date().getSeconds();
@@ -81,7 +92,7 @@ const HomeScreen = (props) => {
           <Image
             style={styles.image}
             source={{
-              uri: "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg",
+              uri: "https://cdn.pixabay.com/photo/2021/05/25/05/05/05-05-59-551_960_720.jpg",
             }}
           />
         </View>
@@ -200,6 +211,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
+    // paddingTop: 10,
     // marginVertical: 10,
     // marginHorizontal: 10,
     // backgroundColor: "red",

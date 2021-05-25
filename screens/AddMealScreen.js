@@ -54,18 +54,18 @@ const AddMealScreen = (props) => {
 AddMealScreen.navigationOptions = (props) => {
   return {
     headerTitle: "Add Meal",
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="Cart"
-          iconName={Platform.OS === "android" ? "md-cart" : "add-circle"}
-          color={Colors.buttonColor}
-          onPress={() => {
-            props.navigation.navigate("QuickAdd");
-          }}
-        />
-      </HeaderButtons>
-    ),
+    // headerRight: () => (
+    //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
+    //     <Item
+    //       title="Cart"
+    //       iconName={Platform.OS === "android" ? "md-cart" : "add-circle"}
+    //       color={Colors.buttonColor}
+    //       onPress={() => {
+    //         props.navigation.navigate("QuickAdd");
+    //       }}
+    //     />
+    //   </HeaderButtons>
+    // ),
   };
 };
 
